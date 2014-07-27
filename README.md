@@ -3,8 +3,6 @@ curvilinear-transform
 
 2d curvilinear coordinate transformation
 
-2d curvilinear coordinate transformation
-
 This program does a 2d curvilinear coordinate transformation on a 
 set of data given a 'centerline' to work with. The program is built
 in a way to work with a specific set of data, but can easily be 
