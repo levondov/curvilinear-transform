@@ -1,14 +1,12 @@
 #
-#
-#
 # Levon Dovlatyan (levondov@berkeley.edu)
 # Danielle Christianson
 # Coordinate Transformations
 # 9 May 2014
 #
-#
-#
-#
+
+
+
 
 import numpy as np
 from coord_transform import coord_transform
