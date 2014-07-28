@@ -3,9 +3,6 @@ import numpy as np  # for array operations
 import numpy.matlib as npm
 import copy
 
-
-
-
 class coord_transform:
     # coordinate points
     xdata = 0

@@ -92,19 +92,19 @@ class ctGUI:
         # init panel
         self.panel = wx.Panel(self.frame, -1);
 
-        # initialize our coord transform program
+        # get our data from txt files
         self.xdata = np.genfromtxt("corrected_grid_sensor_ptsX_20131007.txt", skiprows=2, dtype=None)
         self.ydata = np.genfromtxt("corrected_grid_sensor_ptsY_20131007.txt", skiprows=2, dtype=None)
         self.zdata = np.genfromtxt("corrected_grid_sensor_ptsZ_20131007.txt", skiprows=2, dtype=None)
         self.locations = np.genfromtxt("corrected_grid_sensor_locations_20131007.txt", skiprows=2, dtype=None)
 
-        # create object
+        # initialize our coordinate transform object
         self.ct = coord_transform(self.xdata, self.ydata, self.zdata, self.locations) #give the object all the coordinate/location data
 
         # organize everything into their categories
         self.ct.organize()
 
-        # get coordinate for all different type of points
+        # get coordinates for all different type of points
         self.gpCord = self.ct.getgp()
         self.stCord = self.ct.getst()
         self.tspCord = self.ct.gettsp()
@@ -388,11 +388,66 @@ class ctGUI:
     def plot3dpre(self,event):
         fig = plt.figure()
         ax = fig.add_subplot((111), projection='3d')
-        ax.scatter(self.xdata,self.ydata,self.zdata)
+
+        if self.preColor: #if color
+            # check each category individually
+            if self.prePoints[0]:
+                ax.scatter(self.gpCord[:,0].astype(np.float),self.gpCord[:,1].astype(np.float),self.gpCord[:,2].astype(np.float),
+                                 color='k',label='grid points')
+            if self.prePoints[1]:
+                ax.scatter(self.stCord[:,0].astype(np.float),self.stCord[:,1].astype(np.float),self.stCord[:,2].astype(np.float),
+                                 color='b',label='soil tubes')
+            if self.prePoints[2]:
+                ax.scatter(self.tpCord[:,0].astype(np.float),self.tpCord[:,1].astype(np.float),self.tpCord[:,2].astype(np.float),
+                                 color='r',label='temperature probes')
+            if self.prePoints[3]:
+                ax.scatter(self.tspCord[:,0].astype(np.float),self.tspCord[:,1].astype(np.float),self.tspCord[:,2].astype(np.float),
+                                 color='g',label='total station points')
+            if self.prePoints[4]:
+                ax.scatter(self.otherCord[:,0].astype(np.float),self.otherCord[:,1].astype(np.float),self.otherCord[:,2].astype(np.float),
+                                 color='c',label='other')
+            ax.legend()
+        else: # no color
+            # still check each category
+            if self.prePoints[0]:
+                ax.scatter(self.gpCord[:,0].astype(np.float),self.gpCord[:,1].astype(np.float),self.gpCord[:,2].astype(np.float))
+            if self.prePoints[1]:
+                ax.scatter(self.stCord[:,0].astype(np.float),self.stCord[:,1].astype(np.float),self.stCord[:,2].astype(np.float))
+            if self.prePoints[2]:
+                ax.scatter(self.tpCord[:,0].astype(np.float),self.tpCord[:,1].astype(np.float),self.tpCord[:,2].astype(np.float))
+            if self.prePoints[3]:
+                ax.scatter(self.tspCord[:,0].astype(np.float),self.tspCord[:,1].astype(np.float),self.tspCord[:,2].astype(np.float))
+            if self.prePoints[4]:
+                ax.scatter(self.otherCord[:,0].astype(np.float),self.otherCord[:,1].astype(np.float),self.otherCord[:,2].astype(np.float))
         plt.show()
 
     def plot3dpost(self,event):
         fig = plt.figure()
         ax = fig.add_subplot((111), projection='3d')
-        ax.scatter(self.s*self.l,self.n,self.zdataO.astype(np.float))
+
+        if self.postColor: #if color
+            # check each category individually
+            if self.postPoints[0]:
+                ax.scatter(self.s1*self.l,self.n1,self.gpCord[:,2].astype(np.float),color='k',label='grid points')
+            if self.postPoints[1]:
+                ax.scatter(self.s2*self.l,self.n2,self.stCord[:,2].astype(np.float),color='b',label='soil tubes')
+            if self.postPoints[2]:
+                ax.scatter(self.s3*self.l,self.n3,self.tpCord[:,2].astype(np.float),color='r',label='temperature probes')
+            if self.postPoints[3]:
+                ax.scatter(self.s4*self.l,self.n4,self.tspCord[:,2].astype(np.float),color='g',label='total station points')
+            if self.postPoints[4]:
+                ax.scatter(self.s5*self.l,self.n5,self.otherCord[:,2].astype(np.float),color='c',label='other')
+            ax.legend()
+        else: # no color
+            # still check each category individually
+            if self.postPoints[0]:
+                ax.scatter(self.s1*self.l,self.n1,self.gpCord[:,2].astype(np.float))
+            if self.postPoints[1]:
+                ax.scatter(self.s2*self.l,self.n2,self.stCord[:,2].astype(np.float))
+            if self.postPoints[2]:
+                ax.scatter(self.s3*self.l,self.n3,self.tpCord[:,2].astype(np.float))
+            if self.postPoints[3]:
+                ax.scatter(self.s4*self.l,self.n4,self.tspCord[:,2].astype(np.float))
+            if self.postPoints[4]:
+                ax.scatter(self.s5*self.l,self.n5,self.otherCord[:,2].astype(np.float))
         plt.show()
