@@ -1,0 +1,19 @@
+curvilinear-transform
+=====================
+
+2d curvilinear coordinate transformation
+
+curvilinear-transform is a program that does a 2d curvilinear
+coordinate transformation to a set of data points given a 'centerline' to
+use as a reference for the transformation. The program is written in a
+way to only work with custom data, but can easily be changed to work with
+other data. There is also a built in GUI that displays the data pre and post
+transformation. The program was originally written in matlab, but I have
+rewritten it in python. Origin Matlab code is available upon request. 
+
+Prerequesites needed to run Python 2.6 or higher (Has only been tested on Python 2.7+) The following python packages:
+ 'matplotlib', 'wxpython', 'numpy'
+v1.1
+- added color option for data points
+- added option to show figures in 3d
+
