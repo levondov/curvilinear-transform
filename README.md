@@ -16,6 +16,11 @@ numpy,matplotlib,wxpython
 
 To start the program, simply run/compile the file ctMain.py
 
+v1.2
+- compile time improved by organizing data manually and not with ct.transform()
+- added support for displaying certain categories in the plot
+
+
 v1.1
 - added color option for data points
 - added option to show figures in 3d
