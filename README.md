@@ -20,6 +20,7 @@ v1.2
 - compile time improved by organizing data manually and not with ct.transform()
 - added support for displaying certain categories in the plot
 - 3d plots will now display according to the same settings as the 2d plots (i.e. with colors and categories)
+- added some example pics
 
 
 v1.1
